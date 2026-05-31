@@ -207,16 +207,16 @@ Exemplo:
 
 Organização planejada:
 
-- ´main.py´: inicia o jogo, carrega as configurações principais e chama a execução da partida;
-- ´src/jogo.py´: contém o loop principal do jogo, controlando eventos, atualização da tela, colisões, vidas e encerramento da partida;
-- ´src/config.py´: guarda configurações gerais, como largura e altura da tela e cores;
-- ´src/nave.py´: contém funções relacionadas à nave do jogador, como movimentação e desenho na tela;
-- ´src/meteoro.py´: contém a criação, movimentação e posicionamento dos meteoros que aparecem aleatoriamente;
-- ´src/funcoes.py´: contém funções auxiliares, como exibir textos na tela, verificar colisões e reiniciar a partida;
-- ´src/dados.py´: contém funções de leitura e escrita de arquivos, salvando o tempo decorrido (e/ou sistema de pontuação se implementado) da partida para registrar a pontuação ou recorde do jogador;
-- ´assets/´: armazena imagens, sons e outros recursos usados no jogo.
-- ´tests/´: testes unitários com pytest.
-- ´docs´: documentação do projeto.
+- `main.py`: inicia o jogo, carrega as configurações principais e chama a execução da partida;
+- `src/jogo.py`: contém o loop principal do jogo, controlando eventos, atualização da tela, colisões, vidas e encerramento da partida;
+- `src/config.py`: guarda configurações gerais, como largura e altura da tela e cores;
+- `src/nave.py`: contém funções relacionadas à nave do jogador, como movimentação e desenho na tela;
+- `src/meteoro.py`: contém a criação, movimentação e posicionamento dos meteoros que aparecem aleatoriamente;
+- `src/funcoes.py`: contém funções auxiliares, como exibir textos na tela, verificar colisões e reiniciar a partida;
+- `src/dados.py`: contém funções de leitura e escrita de arquivos, salvando o tempo decorrido (e/ou sistema de pontuação, se implementado) da partida para registrar a pontuação ou recorde do jogador;
+- `assets/`: armazena imagens, sons e outros recursos usados no jogo;
+- `tests/`: contém os testes unitários desenvolvidos com Pytest;
+- `docs/`: contém a documentação do projeto.
 
 
 ## 12. Recursos externos previstos

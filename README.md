@@ -6,10 +6,9 @@ Este repositório é um template para os grupos da disciplina. A proposta é com
 
 ## Integrantes do grupo
 
-- Nome do integrante 1
-- Nome do integrante 2
-- Nome do integrante 3
-- Nome do integrante 4
+- [Aiandra de Sousa Silva](https://github.com/aiandramoraes)
+- [Gabriel Vinícius Soares Doti](https://github.com/GabrielDoti)
+- [Núbia Torres de Oliveira](https://github.com/nubyoli)
 
 ## Estrutura do projeto
 
@@ -22,19 +21,13 @@ Este repositório é um template para os grupos da disciplina. A proposta é com
 
 ## Descrição do jogo
 
-Descreva brevemente a ideia principal do jogo.
+O jogo consiste em controlar uma nave no espaço que deve desviar de meteóros. Esses elementos aparecerão aleatoriamente na jornada do jogador e a cada colisão o personagem pede uma vida. O jogo acaba quando todas as 3 vidas forem perdidas. Ao final é exibido o tempo máximo do jogador desviando dos meteóros, se ele superar o tempo anterior seu novo score é exibido.  
 
-Exemplo:
-
-> O jogo consiste em controlar um personagem que deve coletar moedas e evitar obstáculos. O jogador ganha pontos ao coletar itens e perde vidas ao colidir com obstáculos. A partida termina quando o tempo acaba ou quando o jogador perde todas as vidas.
 
 ## Objetivo do jogador
 
-Explique o que o jogador precisa fazer para vencer ou avançar no jogo.
+O objetivo é desviar dos obstáculos que apareceram aleatoriamente, fazendo isso pelo maior tempo possível.
 
-Exemplo:
-
-> O objetivo é coletar a maior quantidade possível de itens antes que o tempo acabe, evitando colisões com os obstáculos.
 
 ## Regras do jogo
 
@@ -43,9 +36,8 @@ Liste as principais regras do jogo.
 Exemplo:
 
 - O jogador se movimenta usando as setas do teclado.
-- Cada item coletado aumenta a pontuação.
 - Colidir com um obstáculo reduz a quantidade de vidas.
-- A partida termina quando o jogador perde todas as vidas ou quando o tempo acaba.
+- A partida termina quando o jogador perde todas as vidas.
 
 ## Controles
 
@@ -57,8 +49,6 @@ Exemplo:
 - Seta para baixo: mover para baixo
 - Seta para esquerda: mover para esquerda
 - Seta para direita: mover para direita
-- Espaço: realizar ação
-- ESC: sair do jogo
 
 ## Como executar o projeto
 

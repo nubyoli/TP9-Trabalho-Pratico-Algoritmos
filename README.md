@@ -1,4 +1,4 @@
-# Nome do Jogo
+# Star Storm
 
 Projeto final da disciplina de Introdução a Algoritmos/Programação, desenvolvido com Python e Pygame.
 

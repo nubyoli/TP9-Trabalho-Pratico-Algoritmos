@@ -161,7 +161,7 @@ Exemplo:
 
 Descrição:
 
-> Escreva aqui.
+> Nessa primeira versão não haverá itens coletáveis.
 
 ## Pontuação, vidas, tempo ou progresso
 

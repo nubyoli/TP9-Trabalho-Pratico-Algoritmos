@@ -16,10 +16,10 @@ Exemplo:
 
 Liste os integrantes do grupo.
 
-- Nome 1:
-- Nome 2:
-- Nome 3:
-- Nome 4:
+- [Aiandra de Sousa Silva](https://github.com/aiandramoraes)
+- [Gabriel Vinícius Soares Doti](https://github.com/GabrielDoti)
+- [Núbia Torres de Oliveira](https://github.com/nubyoli)
+
 
 ## 3. Tipo de jogo
 
@@ -42,7 +42,7 @@ Exemplos:
 
 Tipo escolhido pelo grupo:
 
-> Escreva aqui.
+> Nave desviando de meteoros.
 
 ## 4. Descrição geral do jogo
 
@@ -57,7 +57,7 @@ Procure responder:
 
 Descrição:
 
-> Escreva aqui.
+> O jogo se passa no espaço, onde o jogador controla uma nave e deve desviar de meteoros que surgem aleatoriamente na tela. Durante a partida, os obstáculos aparecem em diferentes posições, exigindo atenção e reflexos rápidos. A cada colisão, a nave perde uma vida, e o jogo termina quando as três vidas são esgotadas. O desafio é sobreviver pelo maior tempo possível, superando o próprio recorde e alcançando uma pontuação cada vez maior.
 
 ## 5. Objetivo do jogador
 
@@ -75,7 +75,7 @@ Exemplos:
 
 Objetivo:
 
-> Escreva aqui.
+> Sobreviver pelo maior tempo possível controlando uma nave espacial e desviando dos meteoros que surgem aleatoriamente na tela. Quanto mais tempo o jogador permanecer sem perder todas as suas vidas, maior será sua pontuação e a chance de superar o recorde anterior.
 
 ## 6. Regras principais
 
@@ -91,11 +91,11 @@ Exemplo:
 
 Regras do grupo:
 
-- Regra 1:
-- Regra 2:
-- Regra 3:
-- Regra 4:
-- Regra 5:
+- Regra 1: O jogador começa o jogo com 3 vidas.
+- Regra 2: Cada colisão com um meteoro reduz 1 vida do jogador.
+- Regra 3: Se o jogador zerar as vidas o jogo é encerrado. 
+- Regra 4: O tempo de sobrevivência é utilizado como pontuação do jogador.
+- Regra 5: O jogador pode controlar a nave movimentando-a para cima, para baixo, para a esquerda e para a direita.
 
 ## 7. Condição de vitória
 
@@ -111,7 +111,7 @@ Exemplos:
 
 Condição de vitória:
 
-> Escreva aqui.
+> Sobreviver pelo maior tempo possível.
 
 ## 8. Condição de derrota ou encerramento
 
@@ -127,7 +127,7 @@ Exemplos:
 
 Condição de derrota ou encerramento:
 
-> Escreva aqui.
+> O jogador é derrotado quanto perde todas as 3 vidas.
 
 ## 9. Elementos previstos no jogo
 
@@ -141,7 +141,7 @@ Exemplo:
 
 Descrição:
 
-> Escreva aqui.
+> Uma nave espacial controlada pelas setas do teclado.
 
 ## Obstáculos, inimigos ou desafios
 
@@ -151,7 +151,7 @@ Exemplo:
 
 Descrição:
 
-> Escreva aqui.
+> Meteoros aparecem aleatoriamente e devem ser evitados pelo jogador para que este não perca suas vidas.
 
 ## Itens, alvos ou objetos de interação
 
@@ -171,7 +171,7 @@ Exemplo:
 
 Descrição:
 
-> Escreva aqui.
+> O jogador começa com 3 vidas e o tempo decorrido de jogo é exibido na tela, para mostrar o progresso.
 
 ## 10. Controles previstos
 
@@ -188,9 +188,10 @@ Exemplo:
 
 Controles do grupo:
 
-- Tecla/comando:
-- Tecla/comando:
-- Tecla/comando:
+- Seta para cima: mover para cima
+- Seta para baixo: mover para baixo
+- Seta para esquerda: mover para esquerda
+- Seta para direita: mover para direita
 
 ## 11. Organização inicial do código
 
@@ -206,7 +207,14 @@ Exemplo:
 
 Organização planejada:
 
-> Escreva aqui.
+> - main.py: inicia o jogo, carrega as configurações principais e chama a execução da partida;
+- src/jogo.py: contém o loop principal do jogo, controlando eventos, atualização da tela, colisões, vidas e encerramento da partida;
+- src/config.py: guarda configurações gerais, como largura e altura da tela e cores;
+- src/nave.py: contém funções relacionadas à nave do jogador, como movimentação e desenho na tela;
+- src/meteoro.py: contém a criação, movimentação e posicionamento dos meteoros que aparecem aleatoriamente;
+- src/funcoes.py: contém funções auxiliares, como exibir textos na tela, verificar colisões e reiniciar a partida;
+- src/dados.py: contém funções de leitura e escrita de arquivos, salvando o tempo decorrido (e/ou sistema de pontuação se implementado) da partida para registrar a pontuação ou recorde do jogador;
+- assets/: armazena imagens, sons e outros recursos usados no jogo.
 
 
 ## 12. Recursos externos previstos
@@ -222,7 +230,10 @@ Exemplo:
 
 Recursos previstos:
 
-> Escreva aqui.
+> - Imagens: obtidas de bancos os sites de assets, para o background, nave, meteoros e vidas.
+- Sons: obtidos de sites, para trilha do jogo e sons de colisão.
+- Fonte: personalizada no estilo pixel.
+- Tutorial: referência base.
 
 Caso não pretenda utilizar recursos externos, escreva:
 
@@ -245,9 +256,12 @@ Exemplos:
 
 Dificuldades previstas:
 
-- Dificuldade 1:
-- Dificuldade 2:
-- Dificuldade 3:
+- Dificuldade 1: Detectar colisão entre os objetos.
+- Dificuldade 2: Testes.
+- Dificuldade 3: Criação de um sistema de pontuação.
+- Dificuldade 4: Exibição do score baseado no tempo salvo no arquivo.
+- Dificuldade 5: Controlar o surgimento aleatório e a movimentação dos meteoros na tela.
+- Dificuldade 6: Implementar a tela de fim de jogo e a opção de reiniciar a partida.
 
 ## 14. Escopo mínimo para a entrega final
 
@@ -261,7 +275,7 @@ Exemplo:
 
 Escopo mínimo:
 
-> Escreva aqui.
+> A versão mínima do jogo terá uma nave controlada pelo teclado, meteoros surgindo aleatoriamente na tela, sistema de colisão, sistema de vidas, contagem do tempo de sobrevivência como pontuação, exibição da pontuação na tela, salvamento do recorde em arquivo e tela de fim de jogo quando o jogador perder todas as vidas.
 
 ## 15. Possíveis melhorias, caso haja tempo
 
@@ -281,6 +295,8 @@ Exemplos:
 
 Melhorias possíveis:
 
-- Melhoria 1:
-- Melhoria 2:
-- Melhoria 3:
+- Melhoria 1: Criação de uma tela inicial de menu, que da a opção de iniciar o jogo ou ver uma tela de tutorial (sobre a movimentação e objetivo do jogo).
+- Melhoria 2: Implementação de power up para a nave, como elemento de escudo que dura por determinado período e ignora colisões.
+- Melhoria 3: Implementação de ação da nave com os meteoros, como balas para atirar e eliminar os obstaculos. 
+- Melhoria 4: Menu de pausa.
+- Melhoria 5: Aumento de dificuldade, para no decorrer do tempo aumentar a velocidade e/ou a quantidade de obstáculos na tela. 

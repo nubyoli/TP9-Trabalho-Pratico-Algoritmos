@@ -10,7 +10,7 @@ Escreva aqui o nome provisório do jogo.
 
 Exemplo:
 
-> Corrida dos Obstáculos
+> Star Storm
 
 ## 2. Integrantes do grupo
 

@@ -14,7 +14,8 @@ from src.config import (
     METEORO_QTD_INICIAL,
     NAVE_VELOCIDADE,
     PONTOS_POR_SEGUNDO,
-    METEORO_INTERVALO_MS
+    METEORO_INTERVALO_MS,
+    CAMINHO_VIDA,
 )
 
 from src.funcoes import (
@@ -39,14 +40,16 @@ def carrega_imagens():
     nave_img = pygame.image.load(CAMINHO_NAVE).convert_alpha()
     meteoro_img = pygame.image.load(CAMINHO_METEORO).convert_alpha()
     fundo_img = pygame.image.load(CAMINHO_FUNDO).convert_alpha()
+    vida_img = pygame.image.load(CAMINHO_VIDA).convert_alpha()
 
     nave_img = pygame.transform.scale(nave_img, (50, 50))
     meteoro_img = pygame.transform.scale(meteoro_img, (50, 50))
     fundo_img = pygame.transform.scale(fundo_img, (LARGURA_TELA, ALTURA_TELA)) # Para ocupar toda a tela
+    vida_img = pygame.transform.scale(vida_img, (30, 30))
 
-    return nave_img, meteoro_img, fundo_img
+    return nave_img, meteoro_img, fundo_img, vida_img
 
-def atualiza_estado(nave_img, meteoro_img):
+def atualiza_estado(nave_img, meteoro_img, vida_img):
     """"
     Cria e retorna um dicionário com o estado inicial do jogo.
 
@@ -66,6 +69,7 @@ def atualiza_estado(nave_img, meteoro_img):
         "nave": nave,
         "meteoros": meteoros,
         "meteoro_img": meteoro_img,
+        "vida_img": vida_img,
         "pontos": 0,
         "vidas": 3,
         "segundos": 0,
@@ -82,6 +86,10 @@ def renderizar_cena(tela, estado, fundo_img, recorde):
 
     tela.blit(estado["nave"]["imagem"], estado["nave"]["rect"])
 
+    for i in range(estado["vidas"]):
+        x = 10 + i * 38
+        tela.blit(estado["vida_img"], (x, 10)) 
+
 def executar_jogo():
     """Executa o loop principal do jogo e controla estado, colisões e pontuação."""
     pygame.init()
@@ -94,10 +102,10 @@ def executar_jogo():
     rodando = True
 
     # 1. Carregando as imagens 
-    nave_img, meteoro_img, fundo_img = carrega_imagens()
+    nave_img, meteoro_img, fundo_img, vida_img = carrega_imagens()
 
     recorde = carregar_recorde(CAMINHO_RECORDE)
-    estado = atualiza_estado(nave_img, meteoro_img)
+    estado = atualiza_estado(nave_img, meteoro_img, vida_img)
     
     # nave = {
     #     "imagem": nave_img,
@@ -150,6 +158,8 @@ def executar_jogo():
         for meteoro in estado["meteoros"]:
             if verificar_colisao(estado["nave"]["rect"], meteoro["rect"]):
                 estado["vidas"] = tomar_dano(estado["vidas"], 1)
+                estado["meteoros"].remove(meteoro)
+                estado["meteoros"].append(criar_meteoro(estado["meteoro_img"]))
                 break
 
         # Encerra o jogo quando o jogador perde

@@ -1,3 +1,6 @@
+import math
+import random
+
 def calcular_pontos(pontos_atual, pontos_ganhos):
     """Soma os pontos ganhos à pontuação atual."""
     return pontos_atual + pontos_ganhos
@@ -25,3 +28,67 @@ def limitar_valor(valor, minimo, maximo):
 def verificar_colisao(retangulo_1, retangulo_2):
     """Verifica sobreposição entre dois retângulos do Pygame."""
     return retangulo_1.colliderect(retangulo_2)
+
+
+def separar_inimigos(inimigos, distancia_minima=60):
+    """Empurra inimigos que estão sobrepostos para longe um do outro."""
+    for i in range(len(inimigos)):
+        for j in range(i + 1, len(inimigos)):
+            a = inimigos[i]["rect"]
+            b = inimigos[j]["rect"]
+
+            dx = a.centerx - b.centerx
+            dy = a.centery - b.centery
+            distancia = math.hypot(dx, dy)
+
+            if 0 < distancia < distancia_minima:
+                empurrao = (distancia_minima - distancia) / 2
+                fator_x = (dx / distancia) * empurrao
+                fator_y = (dy / distancia) * empurrao
+
+                a.x += int(fator_x)
+                a.y += int(fator_y)
+                b.x -= int(fator_x)
+                b.y -= int(fator_y)
+
+
+def spawnar_inimigo_na_borda(largura_tela, altura_tela):
+    """Retorna uma posição aleatória fora de uma das quatro bordas da tela."""
+    borda = random.choice(["cima", "baixo", "esquerda", "direita"])
+
+    if borda == "cima":
+        return random.randint(0, largura_tela), -50
+    elif borda == "baixo":
+        return random.randint(0, largura_tela), altura_tela + 50
+    elif borda == "esquerda":
+        return -50, random.randint(0, altura_tela)
+    else:
+        return largura_tela + 50, random.randint(0, altura_tela)
+    
+
+def spawnar_meteoro(largura_tela, altura_tela, vel_min=2, vel_max=5):
+    """Cria um meteoro numa borda aleatória com velocidade e direção fixas."""
+    borda = random.choice(["cima", "baixo", "esquerda", "direita"])
+
+    if borda == "cima":
+        x = random.randint(0, largura_tela)
+        y = -50
+        vx = random.uniform(-1.5, 1.5)
+        vy = random.uniform(vel_min, vel_max)
+    elif borda == "baixo":
+        x = random.randint(0, largura_tela)
+        y = altura_tela + 50
+        vx = random.uniform(-1.5, 1.5)
+        vy = -random.uniform(vel_min, vel_max)
+    elif borda == "esquerda":
+        x = -50
+        y = random.randint(0, altura_tela)
+        vx = random.uniform(vel_min, vel_max)
+        vy = random.uniform(-1.5, 1.5)
+    else:
+        x = largura_tela + 50
+        y = random.randint(0, altura_tela)
+        vx = -random.uniform(vel_min, vel_max)
+        vy = random.uniform(-1.5, 1.5)
+
+    return x, y, vx, vy       

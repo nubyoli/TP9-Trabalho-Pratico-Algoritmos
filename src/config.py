@@ -16,7 +16,7 @@ AZUL = (100, 180, 255)
 # Arquivos
 CAMINHO_RECORDE = "data/recorde.txt"
 CAMINHO_SPRITES = "assets/imagens/spritesheet.bmp"
-CAMINHO_VIDA = "assets/imagens/heart.png"
+CAMINHO_VIDA = "assets/imagens/Coracao.png"
 
 # Fonte externa da imagem: https://opengameart.org/content/spaceships-32x32
 CAMINHO_NAVE = "assets/imagens/Ship_4.png"

@@ -16,6 +16,7 @@ from src.config import (
     PONTOS_POR_SEGUNDO,
     METEORO_INTERVALO_MS,
     CAMINHO_VIDA,
+    CAMINHO_FONTE
 )
 
 from src.funcoes import (
@@ -77,7 +78,7 @@ def atualiza_estado(nave_img, meteoro_img, vida_img):
         "ms_meteoros": 0
     }
 
-def renderizar_cena(tela, estado, fundo_img, recorde):
+def renderizar_cena(tela, estado, fundo_img, recorde, fonte):
     """" Desenha os elementos do jogo, como a nave, meteoros, fundo, pontuação e recorde."""
     tela.blit(fundo_img, (0, 0))
 
@@ -90,6 +91,14 @@ def renderizar_cena(tela, estado, fundo_img, recorde):
         x = 10 + i * 38
         tela.blit(estado["vida_img"], (x, 10)) 
 
+    texto_pontos = fonte.render(f"Pontos: {estado['pontos']}", True, (255, 255, 255))
+    tela.blit(texto_pontos, (10, 50))
+
+    texto_recorde = fonte.render(f"Recorde: {recorde}", True, (255, 255, 255))
+    tela.blit(texto_recorde, (10, 80))
+
+    
+
 def executar_jogo():
     """Executa o loop principal do jogo e controla estado, colisões e pontuação."""
     pygame.init()
@@ -97,6 +106,7 @@ def executar_jogo():
 
     tela = pygame.display.set_mode((LARGURA_TELA, ALTURA_TELA))
     pygame.display.set_caption(TITULO_JOGO)
+    fonte = pygame.font.Font(CAMINHO_FONTE, 24)
 
     relogio = pygame.time.Clock()
     rodando = True
@@ -169,7 +179,7 @@ def executar_jogo():
             rodando = False
 
         
-        renderizar_cena(tela, estado, fundo_img, recorde)
+        renderizar_cena(tela, estado, fundo_img, recorde, fonte)
         pygame.display.flip()
 
     pygame.quit()

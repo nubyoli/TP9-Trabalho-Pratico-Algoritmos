@@ -24,6 +24,9 @@ CAMINHO_NAVE = "assets/imagens/Ship_4.png"
 CAMINHO_METEORO = "assets/imagens/meteoro.png"
 CAMINHO_FUNDO = "assets/imagens/fundo.jpg"
 
+# SIte da fonte externa: https://www.dafont.com/pt/upheaval.font
+CAMINHO_FONTE = "assets/fontes/upheavtt.ttf"
+
 # Nave do jogador
 NAVE_VELOCIDADE  = 5
 

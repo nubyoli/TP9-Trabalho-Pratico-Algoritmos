@@ -1,4 +1,5 @@
 import pygame
+import random
 
 from src.config import (
     LARGURA_TELA,
@@ -97,12 +98,10 @@ def renderizar_cena(tela, estado, fundo_img, recorde, fonte):
     texto_recorde = fonte.render(f"Recorde: {recorde}", True, (255, 255, 255))
     tela.blit(texto_recorde, (10, 80))
 
-    
 
 def executar_jogo():
     """Executa o loop principal do jogo e controla estado, colisões e pontuação."""
     pygame.init()
-    
 
     tela = pygame.display.set_mode((LARGURA_TELA, ALTURA_TELA))
     pygame.display.set_caption(TITULO_JOGO)
@@ -117,19 +116,19 @@ def executar_jogo():
     recorde = carregar_recorde(CAMINHO_RECORDE)
     estado = atualiza_estado(nave_img, meteoro_img, vida_img)
     
-    # nave = {
-    #     "imagem": nave_img,
-    #     "rect": nave_img.get_rect(topleft=(100, 100))
-    # }
+    #  VARIÁVEIS DE CONTROLE 
+    estrelas = []
+    item_vida_rara = None
+    tempo_inicial_partida = pygame.time.get_ticks()
+    ultimo_tempo_combo = pygame.time.get_ticks()
+    turbo_ativo = False
+    tempo_inicio_turbo = 0
+    velocidade_atual_nave = NAVE_VELOCIDADE
 
-    # meteoro = {
-    #     "imagem": meteoro_img,
-    #     "rect": meteoro_img.get_rect(topleft=(500, 300))
-    # }
-    
     # Loop principal: processa entrada, atualiza estado e renderiza a cena.
     while rodando:
         dt = relogio.tick(FPS) 
+        tempo_atual = pygame.time.get_ticks()
 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
@@ -137,9 +136,34 @@ def executar_jogo():
             if evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_ESCAPE:
                     rodando = False
+                
+                # MECÂNICA DO TURBO: Ativa ao apertar Shift Esquerdo
+                if evento.key == pygame.K_LSHIFT and not turbo_ativo:
+                    turbo_ativo = True
+                    tempo_inicio_turbo = tempo_atual
+                    velocidade_atual_nave = NAVE_VELOCIDADE * 2.0
 
+        # Controla a duração do turbo (desliga após 2 segundos)
+        if turbo_ativo and tempo_atual - tempo_inicio_turbo > 2000:
+            turbo_ativo = False
+            velocidade_atual_nave = NAVE_VELOCIDADE
+
+        # Movimentação usando a velocidade corrigida
         teclas = pygame.key.get_pressed()
-        mover_nave(estado["nave"]["rect"], teclas, NAVE_VELOCIDADE)
+        
+        # Correção direta do movimento para garantir o funcionamento do Shift
+        if teclas[pygame.K_LEFT] or teclas[pygame.K_a]:
+            estado["nave"]["rect"].x -= velocidade_atual_nave
+        if teclas[pygame.K_RIGHT] or teclas[pygame.K_d]:
+            estado["nave"]["rect"].x += velocidade_atual_nave
+        if teclas[pygame.K_UP] or teclas[pygame.K_w]:
+            estado["nave"]["rect"].y -= velocidade_atual_nave
+        if teclas[pygame.K_DOWN] or teclas[pygame.K_s]:
+            estado["nave"]["rect"].y += velocidade_atual_nave
+
+        # Garante que a nave não saia dos limites da tela
+        estado["nave"]["rect"].x = limitar_valor(estado["nave"]["rect"].x, 0, LARGURA_TELA - estado["nave"]["rect"].width)
+        estado["nave"]["rect"].y = limitar_valor(estado["nave"]["rect"].y, 0, ALTURA_TELA - estado["nave"]["rect"].height)
 
         # A cada segundo a pontuação do jogador vai incrementar em 10 pontos
         estado["ms_acumulados"] += dt
@@ -167,19 +191,85 @@ def executar_jogo():
         # Verificar colisões entre a nave e os meteoros
         for meteoro in estado["meteoros"]:
             if verificar_colisao(estado["nave"]["rect"], meteoro["rect"]):
-                estado["vidas"] = tomar_dano(estado["vidas"], 1)
+                # INVENCIBILIDADE INICIAL: Só perde vida após 3 segundos de jogo
+                if tempo_atual - tempo_inicial_partida > 3000:
+                    estado["vidas"] = tomar_dano(estado["vidas"], 1)
+                    ultimo_tempo_combo = tempo_atual  # Reseta o combo
+                
                 estado["meteoros"].remove(meteoro)
                 estado["meteoros"].append(criar_meteoro(estado["meteoro_img"]))
                 break
 
-        # Encerra o jogo quando o jogador perde
+        # PROGRESSÃO DE DIFICULDADE: A quantidade de estrelas aumenta com a pontuação
+        # Começa em 200 (raro) e vai diminuindo até o limite de 40 (muito frequente)
+        chance_atual = max(40, 200 - (estado["pontos"] // 25))
+
+        # MECÂNICA DAS ESTRELAS 
+        if random.randint(1, chance_atual) == 1:
+            # 35% de chance de nascer uma estrela marrom perigosa
+            cor_estrela = "marrom" if random.randint(1, 10) <= 3 else "amarela"
+            estrelas.append({
+                "rect": pygame.Rect(random.randint(0, LARGURA_TELA - 20), -20, 20, 20),
+                "velocidade": random.randint(3, 6),
+                "tipo": cor_estrela
+            })
+        
+        for estrela in estrelas[:]:
+            estrela["rect"].y += estrela["velocidade"]
+            if estado["nave"]["rect"].colliderect(estrela["rect"]):
+                # Se pegar a estrela MARROM... EXPLOSÃO e Fim de Jogo!
+                if estrela.get("tipo") == "marrom":
+                    pygame.draw.circle(tela, (244, 67, 54), estado["nave"]["rect"].center, 80)
+                    pygame.display.flip()
+                    pygame.time.wait(400)
+                    
+                    if estado["pontos"] > recorde:
+                        salvar_recorde(CAMINHO_RECORDE, estado["pontos"])
+                    rodando = False
+                    break
+                else:
+                    # Estrela amarela normal  dá exatamente 100 pontos
+                    estado["pontos"] += 100
+                estrelas.remove(estrela)
+            elif estrela["rect"].y > ALTURA_TELA:
+                estrelas.remove(estrela)
+
+        if not rodando:
+            break
+
+        # MECÂNICA DA VIDA EXTRA RARA
+        if item_vida_rara is None and random.randint(1, 1500) == 777:
+            item_vida_rara = pygame.Rect(random.randint(40, LARGURA_TELA - 40), random.randint(40, ALTURA_TELA - 40), 30, 30)
+        
+        if item_vida_rara is not None:
+            if estado["nave"]["rect"].colliderect(item_vida_rara):
+                if estado["vidas"] < 5:
+                    estado["vidas"] += 1
+                item_vida_rara = None
+
+        # MECÂNICA DE COMBO (Sobreviver 30 segundos)
+        if tempo_atual - ultimo_tempo_combo >= 30000:
+            estado["pontos"] += 500
+            ultimo_tempo_combo = tempo_atual
+
+        # Renderização customizada para desenhar seus elementos na tela
+        renderizar_cena(tela, estado, fundo_img, recorde, fonte)
+        
+        # Desenha as estrelas na tela (Amarela dá pontos, Marrom mata)
+        for estrela in estrelas:
+            cor_rgb = (139, 69, 19) if estrela.get("tipo") == "marrom" else (255, 235, 59)
+            pygame.draw.circle(tela, cor_rgb, estrela["rect"].center, 10)
+        
+        # Desenha o coração da vida extra se ele existir
+        if item_vida_rara is not None:
+            tela.blit(vida_img, (item_vida_rara.x, item_vida_rara.y))
+
+        # Encerra o jogo quando o jogador perde normalmente por vidas
         if jogador_perdeu(estado["vidas"]):                                             
             if estado["pontos"] > recorde:
                 salvar_recorde(CAMINHO_RECORDE, estado["pontos"])
             rodando = False
 
-        
-        renderizar_cena(tela, estado, fundo_img, recorde, fonte)
         pygame.display.flip()
 
     pygame.quit()

@@ -17,6 +17,7 @@ AZUL = (100, 180, 255)
 CAMINHO_RECORDE = "data/recorde.txt"
 CAMINHO_SPRITES = "assets/imagens/spritesheet.bmp"
 CAMINHO_VIDA = "assets/imagens/Coracao.png"
+CAMINHO_ITEM = "assets/imagens/item.png"
 
 # Fonte externa da imagem: https://opengameart.org/content/spaceships-32x32
 CAMINHO_NAVE = "assets/imagens/Ship_4.png"
@@ -38,3 +39,11 @@ METEORO_INTERVALO_MS = 5000
 
 # Pontuação, a cada segundo incrementa 10
 PONTOS_POR_SEGUNDO = 10
+
+# Power up e power down
+POWER_ITEM_ITERVALO_MS = 8000 
+POWER_ITEM_VELOCIDADE_MIN = 3
+POWER_ITEM_VELOCIDADE_MAX = 6
+DURACAO_ESCUDO = 6000
+DURACAO_NAVE_GRANDE = 6000
+NAVE_GRANDE_TAMANHO = (70, 70)

@@ -1,5 +1,27 @@
 import math
 import random
+import pygame
+
+from src.config import (
+    LARGURA_TELA,
+    ALTURA_TELA,
+    AMARELO,
+    BRANCO,
+    CIANO,
+    CAMINHO_NAVE,
+    CAMINHO_METEORO,
+    CAMINHO_FUNDO,
+    METEORO_QTD_INICIAL,
+    CAMINHO_VIDA,
+    DURACAO_ESCUDO,
+    DURACAO_NAVE_GRANDE,
+    NAVE_GRANDE_TAMANHO,
+    CAMINHO_ITEM,
+    CAMINHO_ESTRELA_AZUL,
+    CAMINHO_ESTRELA_AMARELA
+)
+
+from src.meteoro import criar_meteoro, mover_meteoro, meteoro_saiu_da_tela
 
 def calcular_pontos(pontos_atual, pontos_ganhos):
     """Soma os pontos ganhos à pontuação atual."""
@@ -91,4 +113,5 @@ def spawnar_meteoro(largura_tela, altura_tela, vel_min=2, vel_max=5):
         vx = -random.uniform(vel_min, vel_max)
         vy = random.uniform(-1.5, 1.5)
 
-    return x, y, vx, vy       
+    return x, y, vx, vy      
+ 

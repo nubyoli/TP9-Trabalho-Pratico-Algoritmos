@@ -28,6 +28,9 @@ CAMINHO_FUNDO = "assets/imagens/fundo.jpg"
 # SIte da fonte externa: https://www.dafont.com/pt/upheaval.font
 CAMINHO_FONTE = "assets/fontes/upheavtt.ttf"
 
+CAMINHO_ESTRELA_AMARELA = "assets/imagens/star.svg"
+CAMINHO_ESTRELA_AZUL = "assets/imagens/star.png"
+
 # Nave do jogador
 NAVE_VELOCIDADE  = 5
 
@@ -35,7 +38,7 @@ NAVE_VELOCIDADE  = 5
 METEORO_VELOCIDADE_MIN = 2
 METEORO_VELOCIDADE_MAX = 5
 METEORO_QTD_INICIAL = 4     
-METEORO_INTERVALO_MS = 5000  
+METEORO_INTERVALO_MS = 10000  
 
 # Pontuação, a cada segundo incrementa 10
 PONTOS_POR_SEGUNDO = 10

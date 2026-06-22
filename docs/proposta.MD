@@ -53,7 +53,7 @@ Procure responder:
 
 Descrição:
 
-> O jogo se passa no espaço, onde o jogador controla uma nave e deve desviar de meteoros que surgem aleatoriamente na tela. Durante a partida, os obstáculos aparecem em diferentes posições, exigindo atenção e reflexos rápidos. A cada colisão, a nave perde uma vida, e o jogo termina quando as três vidas são esgotadas. O desafio é sobreviver pelo maior tempo possível, superando o próprio recorde e alcançando uma pontuação cada vez maior.
+> O jogo se passa no espaço, onde o jogador controla uma nave e deve desviar de meteoros que surgem aleatoriamente na tela. Durante a partida, os obstáculos aparecem em diferentes posições, exigindo atenção e reflexos rápidos. A cada colisão, a nave perde uma vida, e o jogo termina quando as três vidas são esgotadas. O desafio é sobreviver pelo maior tempo possível, superando o próprio recorde e alcançando uma pontuação cada vez maior. A cada segundo, são somados 10 pontos ao jogador. Além disso, itens coletáveis aparecem na tela, sendo 2 tipos de estrela, se o jogador coletar uma estrela amarela, ele soma 100 pontos, mas, se coletar a estrela azul ele perde o jogo na hora. São lançados aleatóriamente elementos de power para o jogador coletar, no entanto, existem duas opções: um power up, em que o jogador ganha um escudo de proteção por 6 segundos, assim sua colisão com os meteoros não o faz perder vidas, e um power down, que aumenta o tamanho da nave, dificultando o desvio dos elementos. 
 
 ## 5. Objetivo do jogador
 
@@ -90,8 +90,11 @@ Regras do grupo:
 - Regra 1: O jogador começa o jogo com 3 vidas.
 - Regra 2: Cada colisão com um meteoro reduz 1 vida do jogador.
 - Regra 3: Se o jogador zerar as vidas o jogo é encerrado. 
-- Regra 4: O tempo de sobrevivência é utilizado como pontuação do jogador.
+- Regra 4: A cada segundo sobrevivido são somados 10 pontos ao jogador.
 - Regra 5: O jogador pode controlar a nave movimentando-a para cima, para baixo, para a esquerda e para a direita.
+- Regra 6: Ao coletar uma estrela amarela 100 pontos são somados ao jogador.
+- Regra 7: Ao coletar uma estrela azul o jogo é encerrado.
+- Regra 8: Ao coletar o elemento de power o jogador pode receber um power up (escudo) ou power down (aumento da nave).
 
 ## 7. Condição de vitória
 
@@ -123,7 +126,7 @@ Exemplos:
 
 Condição de derrota ou encerramento:
 
-> O jogador é derrotado quanto perde todas as 3 vidas.
+> O jogador é derrotado quanto perde todas as 3 vidas ou coleta uma estrela azul.
 
 ## 9. Elementos previstos no jogo
 
@@ -157,7 +160,7 @@ Exemplo:
 
 Descrição:
 
-> Nessa primeira versão não haverá itens coletáveis.
+> Estrelas amarelas aparecem na tela e aumentam a pontuação do jogador. Estrelas azul encerram o jogo. Elementos de power podem ajudar ou atrapalhar o jogador.
 
 ## Pontuação, vidas, tempo ou progresso
 
@@ -167,7 +170,7 @@ Exemplo:
 
 Descrição:
 
-> O jogador começa com 3 vidas e o tempo decorrido de jogo é exibido na tela, para mostrar o progresso.
+> O jogador começa com 3 vidas e o tempo decorrido de jogo e a pontuação são exibidos na tela, para mostrar o progresso.
 
 ## 10. Controles previstos
 
@@ -203,16 +206,16 @@ Exemplo:
 
 Organização planejada:
 
-- `main.py`: inicia o jogo, carrega as configurações principais e chama a execução da partida;
-- `src/jogo.py`: contém o loop principal do jogo, controlando eventos, atualização da tela, colisões, vidas e encerramento da partida;
-- `src/config.py`: guarda configurações gerais, como largura e altura da tela e cores;
-- `src/nave.py`: contém funções relacionadas à nave do jogador, como movimentação e desenho na tela;
-- `src/meteoro.py`: contém a criação, movimentação e posicionamento dos meteoros que aparecem aleatoriamente;
-- `src/funcoes.py`: contém funções auxiliares, como exibir textos na tela, verificar colisões e reiniciar a partida;
-- `src/dados.py`: contém funções de leitura e escrita de arquivos, salvando o tempo decorrido (e/ou sistema de pontuação, se implementado) da partida para registrar a pontuação ou recorde do jogador;
-- `assets/`: armazena imagens, sons e outros recursos usados no jogo;
-- `tests/`: contém os testes unitários desenvolvidos com Pytest;
-- `docs/`: contém a documentação do projeto.
+- `main.py`: inicia o jogo;
+- `src/jogo.py`: loop principal.
+- `src/estado.py`: trata do estado do jogo e suas atualizações.
+- `src/tela.py`: renderização dos elementos do jogo.
+- `src/item.py`: trata dos powers aleatórios gerados no jogo.
+- `src/nave.py`: movimentação da nave do jogador.
+- `src/meteoro.py`: criação e movimentação dos meteoros.
+- `src/config.py`: constantes globais (tela, cores, caminhos, FPS).
+- `src/funcoes.py`: funções auxiliares de regra e lógica.
+- `src/dados.py`: leitura e gravação de dados (recorde/ranking).
 
 
 ## 12. Recursos externos previstos
@@ -230,7 +233,9 @@ Recursos previstos:
 
 > - Imagens: obtidas de bancos os sites de assets, para o background, nave, meteoros e vidas.
 - Sons: obtidos de sites, para trilha do jogo e sons de colisão.
-- Fonte: personalizada no estilo pixel.
+- Fonte: personalizada no estilo pixel. (link: [Fonte Pixel](https://www.dafont.com/pt/upheaval.font))
+- Nave: sprite link: [Sprite Nave](https://opengameart.org/content/spaceships-32x32)
+- Estrelas: [Sprite Estrela Amarela](https://opengameart.org/content/star-svg) [Sprite Estrela Azul](https://opengameart.org/content/star)
 - Tutorial: referência base.
 
 Caso não pretenda utilizar recursos externos, escreva:
@@ -296,5 +301,4 @@ Melhorias possíveis:
 - Melhoria 1: Criação de uma tela inicial de menu, que da a opção de iniciar o jogo ou ver uma tela de tutorial (sobre a movimentação e objetivo do jogo).
 - Melhoria 2: Implementação de power up para a nave, como elemento de escudo que dura por determinado período e ignora colisões.
 - Melhoria 3: Implementação de ação da nave com os meteoros, como balas para atirar e eliminar os obstaculos. 
-- Melhoria 4: Menu de pausa.
-- Melhoria 5: Aumento de dificuldade, para no decorrer do tempo aumentar a velocidade e/ou a quantidade de obstáculos na tela. 
+- Melhoria 4: Aumento de dificuldade, para no decorrer do tempo aumentar a velocidade e/ou a quantidade de obstáculos na tela. 

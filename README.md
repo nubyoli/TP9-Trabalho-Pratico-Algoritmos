@@ -21,23 +21,30 @@ Este repositório é um template para os grupos da disciplina. A proposta é com
 
 ## Descrição do jogo
 
-O jogo consiste em controlar uma nave no espaço que deve desviar de meteóros. Esses elementos aparecerão aleatoriamente na jornada do jogador e a cada colisão o personagem pede uma vida. O jogo acaba quando todas as 3 vidas forem perdidas. Ao final é exibido o tempo máximo do jogador desviando dos meteóros, se ele superar o tempo anterior seu novo score é exibido.  
+Star Storm é um jogo de sobrevivência no espaço em que o jogador controla uma nave e precisa desviar de meteoros.
+
+O jogador começa com 3 vidas e perde 1 vida a cada colisão com um meteoro. A partida termina quando todas as vidas acabam ou quando o jogador coleta uma estrela azul.
+
+A pontuação aumenta conforme o tempo de sobrevivência. Além disso, o jogador pode coletar estrelas amarelas para ganhar pontos extras e itens de power, que podem ajudar com um escudo temporário ou atrapalhar aumentando o tamanho da nave.
+
+Ao final da partida, o jogo exibe a pontuação alcançada e salva um novo recorde caso ele seja superado. 
 
 
 ## Objetivo do jogador
 
-O objetivo é desviar dos obstáculos que apareceram aleatoriamente, fazendo isso pelo maior tempo possível.
+O objetivo do jogador é sobreviver pelo maior tempo possível, desviando dos meteoros e evitando perder todas as vidas. Quanto mais tempo o jogador permanecer vivo, maior será sua pontuação. O jogador também pode aumentar sua pontuação coletando estrelas amarelas e tentando superar o próprio recorde.
 
 
 ## Regras do jogo
 
-Liste as principais regras do jogo.
-
-Exemplo:
-
-- O jogador se movimenta usando as setas do teclado.
-- Colidir com um obstáculo reduz a quantidade de vidas.
-- A partida termina quando o jogador perde todas as vidas.
+- Regra 1: O jogador começa o jogo com 3 vidas.
+- Regra 2: Cada colisão com um meteoro reduz 1 vida do jogador.
+- Regra 3: Se o jogador zerar as vidas o jogo é encerrado. 
+- Regra 4: A cada segundo sobrevivido são somados 10 pontos ao jogador.
+- Regra 5: O jogador pode controlar a nave movimentando-a para cima, para baixo, para a esquerda e para a direita.
+- Regra 6: Ao coletar uma estrela amarela 100 pontos são somados ao jogador.
+- Regra 7: Ao coletar uma estrela azul o jogo é encerrado.
+- Regra 8: Ao coletar o elemento de power o jogador pode receber um power up (escudo) ou power down (aumento da nave).
 
 ## Controles
 
@@ -45,10 +52,10 @@ Informe as teclas ou comandos utilizados no jogo.
 
 Exemplo:
 
-- Seta para cima: mover para cima
-- Seta para baixo: mover para baixo
-- Seta para esquerda: mover para esquerda
-- Seta para direita: mover para direita
+- Seta para cima (ou W): mover para cima
+- Seta para baixo (ou S): mover para baixo
+- Seta para esquerda (ou A): mover para esquerda
+- Seta para direita (ou D): mover para direita
 
 ## Como executar o projeto
 
@@ -79,3 +86,7 @@ python -m pytest
 - Mantenham o código organizado em módulos pequenos e com responsabilidade clara.
 - Comentem partes importantes da lógica, principalmente regras do jogo.
 - Registrem decisões técnicas no README do grupo ao longo do desenvolvimento.
+
+## Jogo Rodando
+
+![Jogo Rodando](assets/imagens/jogo.png)
